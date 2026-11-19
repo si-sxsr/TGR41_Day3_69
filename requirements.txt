@@ -1,0 +1,12 @@
+﻿# inference only (Pi 5, 64-bit, CPU). torch CPU wheel: pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
+torch
+torchvision
+ultralytics>=8.4
+ncnn
+onnxruntime
+opencv-python-headless
+numpy
+scipy
+pillow
+requests
+paho-mqtt>=2.0

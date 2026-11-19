@@ -1,0 +1,17 @@
+# secrets
+config.json
+mock_config.json
+# large / regenerable
+downloaded_images/
+dataset_original/
+runs/
+yolo7/
+w_tmp/
+weights_d2/
+init_day2_11n.pt
+out_*/
+mock_submissions/
+*.zip
+*.log
+*.cache
+__pycache__/
