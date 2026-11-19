@@ -28,7 +28,7 @@ import infer
 CONFIG = {
     "http_url": "",                      # announced at the rehearsal, e.g. https://xxx  (no trailing /)
     "http_token": "",                    # team WEBSITE LOGIN PASSWORD (Bearer)
-    "team_id": "TEAM_41",                # MQTT username
+    "team_id": "TGR-41",                  # MQTT username
     "mqtt_key": "",                      # MQTT key generated on the website (password + topic)
     "mqtt_host": "tesa-score.c333m.site",
     "mqtt_port": 443,
