@@ -169,7 +169,9 @@ def main():
         if jobs is None:
             params = {"mode": a.mode} if a.mode else None
             try:
+                tg = time.perf_counter()
                 r = sess.get(f"{base}/api/v1/image", params=params, timeout=60)
+                t_get = time.perf_counter() - tg
             except requests.RequestException as e:
                 log(f"GET error: {e}")
                 break
@@ -194,9 +196,12 @@ def main():
         # ---- 3. POST (first: the server stops its clock here)
         if online and img_id is not None:
             try:
+                tp = time.perf_counter()
                 pr = sess.post(f"{base}/api/v1/submit", json={"img_id": img_id, "predictions": res["entry"]}, timeout=60)
+                t_post = time.perf_counter() - tp
                 info = pr.json() if pr.headers.get("content-type", "").startswith("application/json") else pr.text[:200]
-                log(f"POST {name}: HTTP {pr.status_code} {info if pr.status_code != 200 else 'server ' + str(info.get('duration_seconds')) + ' s'}")
+                log(f"POST {name}: HTTP {pr.status_code} {info if pr.status_code != 200 else 'server ' + str(info.get('duration_seconds')) + ' s'}"
+                    f" | GET {t_get:.2f} s, infer {res['mqtt']['latency_ms'] / 1000:.2f} s, POST round-trip {t_post:.2f} s")
             except requests.RequestException as e:
                 log(f"POST error {name}: {e}")
         # ---- 4. MQTT (async)
